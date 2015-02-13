@@ -1,5 +1,7 @@
 # Sidekiq::Skylight
 
+[![Circle CI](https://circleci.com/gh/lintci/sidekiq-skylight.svg?style=svg)](https://circleci.com/gh/lintci/sidekiq-skylight)
+
 Middleware for instrumenting Sidekiq with Skylight.io
 
 ## Installation
