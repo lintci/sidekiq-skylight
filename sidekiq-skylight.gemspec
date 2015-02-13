@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Sidekiq::Skylight::VERSION
   spec.authors       = ["Allen Madsen"]
   spec.email         = ["blatyo@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Middleware for instrumenting Sidekiq with Skylight.io}
+  spec.description   = %q{Middleware for instrumenting Sidekiq with Skylight.io. Automatically configured when required.}
+  spec.homepage      = "https://github.com/lintci/sidekiq-skylight"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

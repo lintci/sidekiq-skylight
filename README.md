@@ -1,6 +1,6 @@
 # Sidekiq::Skylight
 
-TODO: Write a gem description
+Middleware for instrumenting Sidekiq with Skylight.io
 
 ## Installation
 
@@ -20,11 +20,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Make sure you've setup skylight.io for your project already. Everything else should be automatic.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/sidekiq-skylight/fork )
+1. Fork it ( https://github.com/lintci/sidekiq-skylight/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
