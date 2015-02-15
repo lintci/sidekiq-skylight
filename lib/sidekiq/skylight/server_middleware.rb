@@ -4,7 +4,7 @@ module Sidekiq
   module Skylight
     class ServerMiddleware
       def call(worker, job, queue)
-        ::Skylight.instrument(category: 'app.sidekiq.worker', title: 'process') do
+        ::Skylight.trace("#{worker.class.to_s}#perform", 'app.sidekiq.worker', 'process') do
           yield
         end
       end
