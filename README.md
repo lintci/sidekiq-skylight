@@ -20,6 +20,19 @@ Or install it yourself as:
 
     $ gem install sidekiq-skylight
 
+## Blacklisted Jobs
+
+If there's a job that you don't want to be instrumented via Skylight, you can
+use the `blacklisted_workers` config option like so:
+
+```ruby
+Sidekiq::Skylight.configure do |config|
+  config.blacklisted_workers = ['BlacklistedWorker']
+end
+```
+
+Any workers with the class names you specify will be ignored from any Skylight tracing.
+
 ## Usage
 
 Make sure you've setup skylight.io for your project already. Everything else should be automatic.
