@@ -7,7 +7,9 @@ describe Sidekiq::Skylight::ServerMiddleware do
   BlacklistedWorker = Class.new
 
   it 'wraps block in skylight instrument' do
-    expect(::Skylight).to receive(:trace).with('FakeWorker#perform', 'app.sidekiq.worker', 'process'){|&block| block.call}
+    expect(::Skylight).to receive(:trace).with('FakeWorker#perform', 'app.sidekiq.worker', 'process') do |&block|
+      block.call
+    end
 
     expect{|probe| middleware.call(FakeWorker.new, double(:job), double(:queue), &probe)}.to yield_control
   end
@@ -29,7 +31,9 @@ describe Sidekiq::Skylight::ServerMiddleware do
     end
 
     it 'still instruments non-blacklisted workers' do
-      expect(::Skylight).to receive(:trace).with('FakeWorker#perform', 'app.sidekiq.worker', 'process'){|&block| block.call}
+      expect(::Skylight).to receive(:trace).with('FakeWorker#perform', 'app.sidekiq.worker', 'process') do |&block|
+        block.call
+      end
 
       expect{|probe| middleware.call(FakeWorker.new, double(:job), double(:queue), &probe)}.to yield_control
     end

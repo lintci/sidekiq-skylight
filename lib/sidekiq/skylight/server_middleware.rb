@@ -3,11 +3,11 @@ require 'skylight'
 module Sidekiq
   module Skylight
     class ServerMiddleware
-      def call(worker, job, queue)
+      def call(worker, _job, _queue)
         if config.blacklisted_workers.include?(worker.class.name)
           yield
         else
-          ::Skylight.trace("#{worker.class.to_s}#perform", 'app.sidekiq.worker', 'process', &Proc.new)
+          ::Skylight.trace("#{worker.class}#perform", 'app.sidekiq.worker', 'process', &Proc.new)
         end
       end
 

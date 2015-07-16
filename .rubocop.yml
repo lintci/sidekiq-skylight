@@ -1,0 +1,98 @@
+# Common configuration.
+AllCops:
+  # Include gemspec and Rakefile
+  Include:
+    - '**/*.gemspec'
+    - '**/Rakefile'
+    - '**/*.rake'
+    - '**/Gemfile'
+  Exclude:
+    - 'vendor/**'
+    - 'spec/fixtures/**'
+    - 'bin/**'
+  RunRailsCops: true
+
+# Indent private/protected/public as deep as method definitions
+AccessModifierIndentation:
+  EnforcedStyle: outdent
+  SupportedStyles:
+    - outdent
+    - indent
+
+# Indentation of `when`.
+CaseIndentation:
+  IndentWhenRelativeTo: end
+  SupportedStyles:
+    - case
+    - end
+  IndentOneStep: false
+
+ClassLength:
+  CountComments: false  # count full line comments?
+  Max: 200
+
+# Align ends correctly.
+EndAlignment:
+  # The value `keyword` means that `end` should be aligned with the matching
+  # keyword (if, while, etc.).
+  # The value `variable` means that in assignments, `end` should be aligned
+  # with the start of the variable on the left hand side of `=`. In all other
+  # situations, `end` should still be aligned with the keyword.
+  AlignWith: variable
+  SupportedStyles:
+    - keyword
+    - variable
+
+# Built-in global variables are allowed by default.
+GlobalVars:
+  AllowedVariables: ['$1', '$2', '$3', '$4', '$5', '$6']
+
+LineLength:
+  Max: 120
+
+MethodLength:
+  CountComments: false  # count full line comments?
+  Max: 20
+
+NumericLiterals:
+  MinDigits: 10
+
+SignalException:
+  EnforcedStyle: only_raise
+  SupportedStyles:
+    - only_raise
+    - only_fail
+    - semantic
+
+SpaceBeforeBlockBraces:
+  EnforcedStyle: no_space
+  SupportedStyles:
+    - space
+    - no_space
+
+SpaceInsideBlockBraces:
+  EnforcedStyle: no_space
+  SupportedStyles:
+    - space
+    - no_space
+  # Valid values are: space, no_space
+  EnforcedStyleForEmptyBraces: no_space
+  # Space between { and |. Overrides EnforcedStyle if there is a conflict.
+  SpaceBeforeBlockParameters: false
+
+SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBraces: no_space
+  SupportedStyles:
+    - space
+    - no_space
+
+# Checks whether the source file has a utf-8 encoding comment or not
+Encoding:
+  EnforcedStyle: when_needed
+  SupportedStyles:
+    - when_needed
+    - always
+
+WordArray:
+  MinSize: 0
