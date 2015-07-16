@@ -3,8 +3,6 @@ require 'spec_helper'
 describe Sidekiq::Skylight::ServerMiddleware do
   subject(:middleware){described_class.new}
 
-  let(:configuration) { Sidekiq::Skylight::Configuration.new }
-
   FakeWorker = Class.new
   BlacklistedWorker = Class.new
 
@@ -14,22 +12,26 @@ describe Sidekiq::Skylight::ServerMiddleware do
     expect{|probe| middleware.call(FakeWorker.new, double(:job), double(:queue), &probe)}.to yield_control
   end
 
-  it 'does not instrument a blacklisted worker' do
-    configuration.blacklisted_workers = ['BlacklistedWorker']
+  context 'with blacklisted workers' do
+    around(:each) do |example|
+      previous_blacklisted = Sidekiq::Skylight.config.blacklisted_workers
+      Sidekiq::Skylight.config.blacklisted_workers = %w(BlacklistedWorker)
 
-    allow(::Skylight).to receive(:trace)
-    allow(Sidekiq::Skylight).to receive(:config).and_return(configuration)
+      example.run
 
-    middleware.call(BlacklistedWorker.new, double(:job), double(:queue)) do
-      puts 'running my blacklisted job'
+      Sidekiq::Skylight.config.blacklisted_workers = previous_blacklisted
     end
 
-    expect(::Skylight).not_to have_received(:trace)
+    it 'does not instrument a blacklisted worker' do
+      expect(::Skylight).to_not receive(:trace)
 
-    middleware.call(FakeWorker.new, double(:job), double(:queue)) do
-      puts 'running my job'
+      expect{|probe| middleware.call(BlacklistedWorker.new, double(:job), double(:queue), &probe)}.to yield_control
     end
 
-    expect(::Skylight).to have_received(:trace)
+    it 'still instruments non-blacklisted workers' do
+      expect(::Skylight).to receive(:trace).with('FakeWorker#perform', 'app.sidekiq.worker', 'process'){|&block| block.call}
+
+      expect{|probe| middleware.call(FakeWorker.new, double(:job), double(:queue), &probe)}.to yield_control
+    end
   end
 end
