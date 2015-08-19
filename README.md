@@ -33,6 +33,10 @@ end
 
 Any workers with the class names you specify will be ignored from any Skylight tracing.
 
+## ActiveJob
+
+If you use Sidekiq as a backend to ActiveJob, your ActiveJob name will be passed to Skylight.
+
 ## Usage
 
 Make sure you've setup skylight.io for your project already. Everything else should be automatic.
