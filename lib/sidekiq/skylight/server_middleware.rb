@@ -20,7 +20,8 @@ module Sidekiq
 
       def blacklisted?(worker, name)
         config.blacklisted_workers.include?(name) ||
-          (worker.respond_to?(:blacklisted?) && worker.blacklisted?)
+          (worker.respond_to?(:blacklisted_for_skylight?) &&
+           worker.blacklisted_for_skylight?)
       end
 
       def expand_worker_name(worker, job)

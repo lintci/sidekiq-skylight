@@ -1,7 +1,7 @@
 module Sidekiq
   module Skylight
     module Blacklisted
-      def blacklisted?
+      def blacklisted_for_skylight?
         true
       end
     end
