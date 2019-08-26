@@ -2,6 +2,8 @@
 
 [![Circle CI](https://circleci.com/gh/lintci/sidekiq-skylight.svg?style=svg)](https://circleci.com/gh/lintci/sidekiq-skylight)
 
+## This gem is deprecated. Use the official one instead. See https://blog.skylight.io/background-jobs/
+
 Middleware for instrumenting Sidekiq with Skylight.io
 
 ## Installation
